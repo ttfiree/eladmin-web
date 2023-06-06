@@ -5,6 +5,7 @@ import store from '../store'
 import { getToken } from '@/utils/auth'
 import Config from '@/settings'
 import Cookies from 'js-cookie'
+import md5 from 'js-md5'
 
 // 创建axios实例
 const service = axios.create({
@@ -18,6 +19,14 @@ service.interceptors.request.use(
     if (getToken()) {
       config.headers['Authorization'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
     }
+    const timestamp = new Date().getTime()
+    const nonce = Math.floor(Math.random() * 1000000)
+    config.headers['nonce'] = nonce
+    const sign = generateSign(nonce, timestamp) // 生成签名
+    config.headers['timestamp'] = timestamp
+    config.headers['sign'] = sign // 添加签名到请求头
+    // 添加随机数到请求头
+
     config.headers['Content-Type'] = 'application/json'
     return config
   },
@@ -25,6 +34,12 @@ service.interceptors.request.use(
     Promise.reject(error)
   }
 )
+
+function generateSign(param, timestamp) {
+  // 根据实际情况生成签名，这里只是示例代码，需要根据实际情况进行修改
+  const str = timestamp.toString() + JSON.stringify(param) + 'utf-8'
+  return md5(str)
+}
 
 // response 拦截器
 service.interceptors.response.use(
