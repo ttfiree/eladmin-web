@@ -55,6 +55,7 @@ export default {
       })
     }
     editor.config.onchange = (html) => {
+      console.log(html)
       this.editorContent = html
     }
     editor.create()

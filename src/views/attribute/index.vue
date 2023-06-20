@@ -70,6 +70,24 @@
           <el-form-item label="extDecimalFive">
             <el-input v-model="form.extDecimalFive" style="width: 370px;" />
           </el-form-item>
+          <el-form-item label="生命值">
+            <el-input v-model="form.hitPoints" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="护甲值">
+            <el-input v-model="form.armorClass" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="迷宫id">
+            <el-input v-model="form.mazeid" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="金钱加成">
+            <el-input v-model="form.moneyPlus" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="经验加成">
+            <el-input v-model="form.expPlus" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="掉率加成">
+            <el-input v-model="form.itemPlus" style="width: 370px;" />
+          </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button type="text" @click="crud.cancelCU">取消</el-button>
@@ -100,6 +118,12 @@
         <el-table-column prop="extDecimalThree" label="extDecimalThree" />
         <el-table-column prop="extDecimalFour" label="extDecimalFour" />
         <el-table-column prop="extDecimalFive" label="extDecimalFive" />
+        <el-table-column prop="hitPoints" label="生命值" />
+        <el-table-column prop="armorClass" label="护甲值" />
+        <el-table-column prop="mazeid" label="迷宫id" />
+        <el-table-column prop="moneyPlus" label="金钱加成" />
+        <el-table-column prop="expPlus" label="经验加成" />
+        <el-table-column prop="itemPlus" label="掉率加成" />
         <el-table-column v-if="checkPer(['admin','gameAttribute:edit','gameAttribute:del'])" label="操作" width="150px" align="center">
           <template slot-scope="scope">
             <udOperation
@@ -123,7 +147,7 @@ import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
 import pagination from '@crud/Pagination'
 
-const defaultForm = { id: null, strength: null, dexterity: null, constitution: null, intelligence: null, wisdom: null, charisma: null, damage: null, attactSpeed: null, criticalChance: null, criticalDamage: null, extStringOne: null, extStringTwo: null, extStringThree: null, extStringFour: null, extStringFive: null, extDecimalOne: null, extDecimalTwo: null, extDecimalThree: null, extDecimalFour: null, extDecimalFive: null }
+const defaultForm = { id: null, strength: null, dexterity: null, constitution: null, intelligence: null, wisdom: null, charisma: null, damage: null, attactSpeed: null, criticalChance: null, criticalDamage: null, extStringOne: null, extStringTwo: null, extStringThree: null, extStringFour: null, extStringFive: null, extDecimalOne: null, extDecimalTwo: null, extDecimalThree: null, extDecimalFour: null, extDecimalFive: null, hitPoints: null, armorClass: null, mazeid: null, moneyPlus: null, expPlus: null, itemPlus: null }
 export default {
   name: 'GameAttribute',
   components: { pagination, crudOperation, rrOperation, udOperation },

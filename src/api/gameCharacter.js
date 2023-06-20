@@ -24,4 +24,12 @@ export function edit(data) {
   })
 }
 
+export function fight() {
+  return request({
+    url: 'api/gameBattle/battle',
+    method: 'post',
+    data: { }
+  })
+}
+
 export default { add, edit, del }

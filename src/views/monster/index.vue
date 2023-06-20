@@ -67,6 +67,30 @@
           <el-form-item label="生命值" prop="hitPoints">
             <el-input v-model="form.hitPoints" style="width: 370px;" />
           </el-form-item>
+          <el-form-item label="速度">
+            <el-input v-model="form.speed" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="暴击率">
+            <el-input v-model="form.criticalChance" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="护甲">
+            <el-input v-model="form.armorClass" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="伤害">
+            <el-input v-model="form.damage" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="暴击伤害">
+            <el-input v-model="form.criticalDamage" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="等级">
+            <el-input v-model="form.level" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="是否是boss级别">
+            <el-input v-model="form.isBoss" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="类型">
+            <el-input v-model="form.type" style="width: 370px;" />
+          </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button type="text" @click="crud.cancelCU">取消</el-button>
@@ -96,6 +120,14 @@
         <el-table-column prop="item" label="爆率" />
         <el-table-column prop="itemRate" label="爆率等级" />
         <el-table-column prop="hitPoints" label="生命值" />
+        <el-table-column prop="speed" label="速度" />
+        <el-table-column prop="criticalChance" label="暴击率" />
+        <el-table-column prop="armorClass" label="护甲" />
+        <el-table-column prop="damage" label="伤害" />
+        <el-table-column prop="criticalDamage" label="暴击伤害" />
+        <el-table-column prop="level" label="等级" />
+        <el-table-column prop="isBoss" label="是否是boss级别" />
+        <el-table-column prop="type" label="类型" />
         <el-table-column v-if="checkPer(['admin','gameMonster:edit','gameMonster:del'])" label="操作" width="150px" align="center">
           <template slot-scope="scope">
             <udOperation
@@ -119,7 +151,7 @@ import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
 import pagination from '@crud/Pagination'
 
-const defaultForm = { id: null, mazeId: null, createTime: null, isDelete: null, extStringOne: null, extStringTwo: null, extStringThree: null, extStringFour: null, extStringFive: null, extDecimalOne: null, extDecimalTwo: null, extDecimalThree: null, extDecimalFour: null, extDecimalFive: null, name: null, experience: null, money: null, item: null, itemRate: null, hitPoints: null }
+const defaultForm = { id: null, mazeId: null, createTime: null, isDelete: null, extStringOne: null, extStringTwo: null, extStringThree: null, extStringFour: null, extStringFive: null, extDecimalOne: null, extDecimalTwo: null, extDecimalThree: null, extDecimalFour: null, extDecimalFive: null, name: null, experience: null, money: null, item: null, itemRate: null, hitPoints: null, speed: null, criticalChance: null, armorClass: null, damage: null, criticalDamage: null, level: null, isBoss: null, type: null }
 export default {
   name: 'GameMonster',
   components: { pagination, crudOperation, rrOperation, udOperation },
