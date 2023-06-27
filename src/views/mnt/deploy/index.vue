@@ -214,6 +214,7 @@ export default {
         })
     },
     initSelect() {
+      debugger
       crudDeploy.getApps().then(res => {
         this.apps = res.content
       })
