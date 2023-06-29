@@ -1,6 +1,19 @@
 <template>
   <div class="app-container">
-    <el-button type="text" @click="fightbutton">战斗</el-button>
+    <el-button
+      class="filter-item"
+      size="mini"
+      type="warning"
+      icon="el-icon-download"
+      @click="fightbutton"
+    >战斗</el-button>
+    <el-button
+      class="filter-item"
+      size="mini"
+      type="warning"
+      icon="el-icon-download"
+      @click="drop"
+    >掉落</el-button>
     <!--工具栏-->
     <div ref="editorContainer" v-html="editorContent" />
   </div>
@@ -8,12 +21,24 @@
 
 <script>
 import { fight } from '@/api/gameCharacter'
+import { drop } from '@/api/gameMonster'
+import { ref } from 'vue'
 let battleTime = null
 let co1 = null
 let co2 = null
 export default {
   name: 'GameCharacter',
   components: { },
+  setup() {
+    const items = ref([])
+    const eq = ref({})
+    const namecolor = ref('#ffdead')
+    return {
+      items,
+      eq,
+      namecolor
+    }
+  },
   data() {
     return {
       editorContent: ''
@@ -77,11 +102,20 @@ export default {
             i++
           } else {
             if (battleTime) {
+              this.eq = res.gameArmorsDto
+              this.editorContent += '  <div>\n' +
+                '        <itemdisplay :item="eq" />\n' +
+                '      </div>'
               this.editorContent += '下次战斗时间：' + new Date(battleTime).toLocaleString() + '<br>'
             }
             clearInterval(co2)
           }
         }, 500)
+      })
+    }, drop() {
+      drop().then(res => {
+        // 打印日志
+        this.eq = res
       })
     }
   }
